@@ -1,70 +1,70 @@
 package br.com.juliana.demo.service;
 
-import br.com.juliana.demo.model.Lending;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.UUID;
-import java.time.format.DateTimeFormatter;  
+
+import org.springframework.stereotype.Service;
+
+import br.com.juliana.demo.dto.Lending;
+import br.com.juliana.demo.dto.LendingResponse;
+import br.com.juliana.demo.dto.Person;
+import br.com.juliana.demo.enumerations.LendingType;
+
 import java.time.LocalDateTime; 
-
+@Service
 public class LendingService {
-    UUID uuid = UUID.randomUUID();
-    String uuidAsString = uuid.toString();
-    private int cpf;
-    private String name;
-    private int age;
-    private String uf;
-    private int monthlyIncome;
+    String uuidNumeroSolicitacao = UUID.randomUUID().toString();
 
-    void Person(int cpf, String name, int age, String uf, int monthlyIncome) {
-        this.cpf = cpf;
-        this.name = name;
-        this.age = age;
-        this.uf = uf;
-        this.monthlyIncome = monthlyIncome;
+    private boolean valueSecuredLending(Person person) {
+        if(person.getRenda_mensal() < 3000 && "SP".equals(person.getUf()) && person.getIdade() < 30) {
+            return true;
+        }
+
+        if(person.getRenda_mensal() >= 3000 && person.getRenda_mensal() < 5000 && "SP".equals(person.getUf()) && person.getIdade() >= 30) {
+            return true;
+        }
+
+        if(person.getRenda_mensal() >= 5000 && person.getIdade() >= 30) {
+            return true;
+        }
+
+        return false;
+
     }
 
-    public String save() {
-        boolean valueSecuredLending = false;
-        boolean valuePayrollLending = false;
-
-        Lending lending = new Lending();
-        lending.setTypeLending("EMPRESTIMO_PESSOAL");
-        lending.setTax(4);
-
-        if (this.monthlyIncome < 3000) {
-
-            if(this.uf == "SP" && this.age < 30) {
-                valueSecuredLending = true;
-            }
+    private boolean valuePayrollLending(Person person) {
+        if(person.getRenda_mensal() >= 5000) {
+            return true;
         }
 
-        if (this.monthlyIncome >= 3000 && this.monthlyIncome < 5000) {
+        return false;
+    }
 
-            if (this.uf == "SP") {
-                valueSecuredLending = true;
-            }
+    public LendingResponse lendingOptions(Person person) {
+
+        List<Lending> lendingList = new ArrayList();
+        Lending personLending = new Lending(LendingType.EMPRESTIMO_PESSOAL);
+        lendingList.add(personLending);
+
+        if(valueSecuredLending(person)) {
+            Lending securedLending = new Lending(LendingType.EMPRESTIMO_GARANTIA);
+            lendingList.add(securedLending);
         }
 
-        if (this.monthlyIncome >= 5000) {
-            valuePayrollLending = true;  
-
-            if (this.age < 30) {
-                valueSecuredLending = true;
-            }
-        }
-        
-        if(valueSecuredLending) {
-            lending.setTypeLending("EMPRESTIMO_GARANTIA");
-            lending.setTax(3);
+        if(valuePayrollLending(person)) {
+            Lending payrollLending = new Lending(LendingType.EMPRESTIMO_CONSIGNADO);
+            lendingList.add(payrollLending);
         }
 
-        if(valuePayrollLending) {
-            lending.setTypeLending("EMPRESTIMO_GARANTIA");
-            lending.setTax(2);
-        }
+        LendingResponse lendingResponse = new LendingResponse();
+        lendingResponse.setNumero_solicitacao(uuidNumeroSolicitacao);
+        lendingResponse.setData_solicitacao(LocalDateTime.now());
+        lendingResponse.setCliente(person);
+        lendingResponse.setProdutos_emprestimo(lendingList);
 
-
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
-        LocalDateTime now = LocalDateTime.now();  
-        return "data: {" + "numero_solicitacao=" + this.uuidAsString + ", data_solicitacao:" + dtf.format(now) + ", cliente: { nome='" + this.name + '\'' + ", cpf='" + this.cpf + ", idade='" + this.age + ", uf='" + this.uf + ", renda_mensal='" + this.monthlyIncome +"}"  +'\'' + '}';
+        return lendingResponse;
     }
 }
