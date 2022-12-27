@@ -2,6 +2,7 @@ package br.com.juliana.lending;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -32,9 +33,9 @@ class LendingApplicationTests {
 		person.setRenda_mensal(3000);
 		requestBodyLending = new RequestBodyLending(person);
 		lendingService = new LendingService();
+		lendingList = new ArrayList<>();
 		lendingList.add(new Lending(LendingType.EMPRESTIMO_PESSOAL));
 		lendingList.add(new Lending(LendingType.EMPRESTIMO_GARANTIA));
-		lendingList.add(new Lending(LendingType.EMPRESTIMO_CONSIGNADO));
 	}
 
 	@Test
