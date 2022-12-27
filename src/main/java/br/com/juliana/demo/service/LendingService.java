@@ -23,11 +23,11 @@ public class LendingService {
             return true;
         }
 
-        if(person.getRenda_mensal() >= 3000 && person.getRenda_mensal() < 5000 && "SP".equals(person.getUf()) && person.getIdade() >= 30) {
+        if(person.getRenda_mensal() >= 3000 && person.getRenda_mensal() < 5000 && "SP".equals(person.getUf())) {
             return true;
         }
 
-        if(person.getRenda_mensal() >= 5000 && person.getIdade() >= 30) {
+        if(person.getRenda_mensal() >= 5000 && person.getIdade() <= 30) {
             return true;
         }
 

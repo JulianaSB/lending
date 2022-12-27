@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.juliana.demo.dto.LendingResponse;
 import br.com.juliana.demo.dto.Person;
+import br.com.juliana.demo.dto.RequestBodyLending;
 import br.com.juliana.demo.service.LendingService;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +22,7 @@ public class LendingController {
     }
 
     @PostMapping("/lending")
-    ResponseEntity<LendingResponse> newLending(@RequestBody Person newPerson) {
-        return ResponseEntity.ok(service.lendingOptions(newPerson));
+    ResponseEntity<LendingResponse> newLending(@RequestBody RequestBodyLending newPerson) {
+        return ResponseEntity.ok(service.lendingOptions(newPerson.getCliente()));
     }
 }
