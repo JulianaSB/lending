@@ -1,4 +1,4 @@
-package br.com.juliana.demo.enumerations;
+package br.com.juliana.lending.enumerations;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

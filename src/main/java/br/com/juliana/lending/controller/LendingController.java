@@ -1,4 +1,4 @@
-package br.com.juliana.demo.controller;
+package br.com.juliana.lending.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.juliana.demo.dto.LendingResponse;
-import br.com.juliana.demo.dto.Person;
-import br.com.juliana.demo.dto.RequestBodyLending;
-import br.com.juliana.demo.service.LendingService;
+import br.com.juliana.lending.dto.LendingResponse;
+import br.com.juliana.lending.dto.Person;
+import br.com.juliana.lending.dto.RequestBodyLending;
+import br.com.juliana.lending.service.LendingService;
 
 import org.springframework.web.bind.annotation.RequestBody;
 @RestController

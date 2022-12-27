@@ -1,4 +1,4 @@
-package br.com.juliana.demo.dto;
+package br.com.juliana.lending.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;

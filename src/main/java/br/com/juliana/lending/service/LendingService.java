@@ -1,4 +1,4 @@
-package br.com.juliana.demo.service;
+package br.com.juliana.lending.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,10 +8,10 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import br.com.juliana.demo.dto.Lending;
-import br.com.juliana.demo.dto.LendingResponse;
-import br.com.juliana.demo.dto.Person;
-import br.com.juliana.demo.enumerations.LendingType;
+import br.com.juliana.lending.dto.Lending;
+import br.com.juliana.lending.dto.LendingResponse;
+import br.com.juliana.lending.dto.Person;
+import br.com.juliana.lending.enumerations.LendingType;
 
 import java.time.LocalDateTime; 
 @Service

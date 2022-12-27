@@ -1,6 +1,6 @@
-package br.com.juliana.demo.dto;
+package br.com.juliana.lending.dto;
 
-import br.com.juliana.demo.enumerations.LendingType;
+import br.com.juliana.lending.enumerations.LendingType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
