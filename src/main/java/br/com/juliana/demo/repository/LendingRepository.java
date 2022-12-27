@@ -28,7 +28,7 @@ public class LendingRepository {
         this.monthlyIncome = monthlyIncome;
     }
 
-    public String toString() {
+    public String save() {
         boolean valueSecuredLending = false;
         boolean valuePayrollLending = false;
 
